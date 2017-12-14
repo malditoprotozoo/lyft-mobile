@@ -73,6 +73,16 @@ $(document).ready(function() {
           $("#loader").fadeOut();
         },1000);
       });
+      
+      $("#verify-input").keyup(function() {
+        var thisValue = $(this).val();
+        if (thisValue.length == 3) {
+          $("#verify-btn").removeClass("disabled");
+        } else {
+          $("#verify-btn").addClass("disabled");
+        }
+      });
+
       $("#verify-btn").click(function() {
         var verifyInput = $("#verify-input").val();
         if (verifyInput == userCode || verifyInput == newCode) {
@@ -83,6 +93,14 @@ $(document).ready(function() {
           setTimeout(function(){
             $("#loader").fadeOut();
           },1000);
+          $("#register-prev-btn").click(function() {
+            $("#register").fadeOut();
+            $("#loader").css({"display":"flex"});
+            $("#verify").fadeIn();
+            setTimeout(function() {
+              $("#loader").fadeOut();
+            },1000);
+          });
         } else {
           alert("This number is incorrect.");
         }
