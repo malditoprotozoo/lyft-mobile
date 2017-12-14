@@ -1,3 +1,6 @@
+/**
+* Generates random number (duh)
+*/
 var randomNumber = (function() {
   var code = "";
   var str = "1234567890";
@@ -18,6 +21,9 @@ $(document).ready(function() {
     $("#loader").css({"display":"flex"});
     $("#signup").fadeIn();
     setTimeout(function(){
+      /**
+      * Loader added to all transitions, to avoid watching the site when is loading
+      */
       $("#loader").fadeOut();
     },1000);
     /**
@@ -42,6 +48,9 @@ $(document).ready(function() {
     });
 
     $("#phone-input").keyup(function() {
+      /**
+      * Regular expression to add the class disabled when the user inputs letters
+      */
       var avoidLetters = /^[0-9]*$/;
       var thisInput = $(this).val();
       if (thisInput.length >= 10 && avoidLetters.test(thisInput)) {
@@ -136,5 +145,3 @@ $(document).ready(function() {
     });
   });
 });
-
-// alert("It seems that we don't have your calling code. Please add it manually :)");
