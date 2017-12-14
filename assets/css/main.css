@@ -58,7 +58,14 @@
 
 #login .btn-large {
   margin: 0.5em;
+}
+
+.btn-large {
   background-color: #ff00be;
+}
+
+.btn-large:hover {
+  background-color: #c50189;
 }
 
 #signup {
