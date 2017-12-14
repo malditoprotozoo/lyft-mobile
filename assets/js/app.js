@@ -13,7 +13,7 @@ $(document).ready(function() {
   },5000);
   $("#signup-btn").click(function() {
     $("#login").fadeOut();
-    $("body").append(sectionSignup);
+    $("body").prepend(sectionSignup);
     $("#country").countrySelect();
     $("#loader").css({"display":"flex"});
     $("#signup").fadeIn();
@@ -23,6 +23,15 @@ $(document).ready(function() {
     /**
     * Determine the calling code per country
     */
+    $("#signup-prev-btn").click(function() {
+      $("#signup").fadeOut();
+      $("#loader").css({"display":"flex"});
+      $("#login").fadeIn();
+      setTimeout(function(){
+        $("#loader").fadeOut();
+      },1000);
+    });
+
     $("#phone-input").click(function() {
       for (var i = 0; i < data.length; i++) {
         var countryVal = $("#country").val();
@@ -47,20 +56,67 @@ $(document).ready(function() {
       alert(userCode);
       $("#signup").fadeOut();
       $("#loader").css({"display":"flex"});
-      $("body").append(sectionVerify);
+      $("body").prepend(sectionVerify);
       $("#verify").fadeIn();
+      var newCode = randomNumber();
+      $("#resend").click(function() {
+        alert(newCode);
+      });
       setTimeout(function(){
         $("#loader").fadeOut();
       },1000);
+      $("#verify-prev-btn").click(function() {
+        $("#verify").fadeOut();
+        $("#loader").css({"display":"flex"});
+        $("#signup").fadeIn();
+        setTimeout(function() {
+          $("#loader").fadeOut();
+        },1000);
+      });
       $("#verify-btn").click(function() {
         var verifyInput = $("#verify-input").val();
-        if (verifyInput == userCode) {
-          alert("holi");
-        };
+        if (verifyInput == userCode || verifyInput == newCode) {
+          $("#verify").fadeOut();
+          $("#loader").css({"display":"flex"});
+          $("body").prepend(sectionRegister);
+          $("#register").fadeIn();
+          setTimeout(function(){
+            $("#loader").fadeOut();
+          },1000);
+        } else {
+          alert("This number is incorrect.");
+        }
+        $("#agreement").click(function() {
+          var firstName = $("#first-name").val().length;
+          var lastName = $("#last-name").val().length;
+          var emailInput = $("#email").val().length;
+          var agree = $(this).val();
+          if(firstName !== 0 && lastName !== 0 && emailInput !== 0 && agree == "on") {
+            $("#register-btn").removeClass("disabled");
+          } else {
+            $("#register-btn").addClass("disabled");
+          }
+          $("#register-btn").click(function() {
+            $("#register").fadeOut();
+            $("#loader").css({"display":"flex"});
+            $("body").prepend(sectionSuccessful);
+            $("#successful").fadeIn();
+            setTimeout(function() {
+              $("#loader").fadeOut();
+            },1000);
+            $("#successful-btn").click(function() {
+              $("#successful").fadeOut();
+              $("#loader").css({"display":"flex"});
+              $("#login").fadeIn();
+              setTimeout(function() {
+                $("#loader").fadeOut();
+              },1000);
+            });
+          });
+        });
       });
     });
   });
-
 });
 
 // alert("It seems that we don't have your calling code. Please add it manually :)");

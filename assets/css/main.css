@@ -55,12 +55,9 @@
   z-index: 1;
 }
 
-#login .btn-large {
-  margin: 0.5em;
-}
-
 .btn-large {
   background-color: #ff00be;
+  margin: 0.5em;
 }
 
 .btn-large:hover {
@@ -86,6 +83,19 @@
 
 #verify-input {
   width: 222px;
+  text-align: center;
+}
+
+#successful {
+  display: none;
+}
+
+#resend {
+  cursor: pointer;
+}
+
+form p {
+  text-align: center;
 }
 
 @keyframes fadein {
