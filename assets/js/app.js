@@ -112,33 +112,36 @@ $(document).ready(function() {
           });
         } else {
           alert("This number is incorrect.");
-        }
+        };
+        var click = 0;
         $("#agreement").click(function() {
+          click++;
           var firstName = $("#first-name").val().length;
           var lastName = $("#last-name").val().length;
           var emailInput = $("#email").val().length;
-          var agree = $(this).val();
-          if(firstName !== 0 && lastName !== 0 && emailInput !== 0 && agree == "on") {
+          var agree = $(this).attr("checked", true);
+          if(firstName > 0 && lastName > 0 && emailInput > 0 && click%2 !== 0) {
             $("#register-btn").removeClass("disabled");
           } else {
             $("#register-btn").addClass("disabled");
           }
-          $("#register-btn").click(function() {
-            $("#register").fadeOut();
+        });
+
+        $("#register-btn").click(function() {
+          $("#register").fadeOut();
+          $("#loader").css({"display":"flex"});
+          $("body").prepend(sectionSuccessful);
+          $("#successful").fadeIn();
+          setTimeout(function() {
+            $("#loader").fadeOut();
+          },1000);
+          $("#successful-btn").click(function() {
+            $("#successful").fadeOut();
             $("#loader").css({"display":"flex"});
-            $("body").prepend(sectionSuccessful);
-            $("#successful").fadeIn();
+            $("#login").fadeIn();
             setTimeout(function() {
               $("#loader").fadeOut();
             },1000);
-            $("#successful-btn").click(function() {
-              $("#successful").fadeOut();
-              $("#loader").css({"display":"flex"});
-              $("#login").fadeIn();
-              setTimeout(function() {
-                $("#loader").fadeOut();
-              },1000);
-            });
           });
         });
       });
